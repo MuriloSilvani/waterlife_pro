@@ -14,7 +14,7 @@ import {
   Image
 } from '../../styles/pages/login'
 
-import api from '../api'
+import api from '../../services/api'
 
 const Login = () => {
   const router = useRouter()

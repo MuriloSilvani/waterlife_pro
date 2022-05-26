@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
 import { FaSignOutAlt } from 'react-icons/fa'
 
-import api from '../../pages/api'
+import api from '../../services/api'
 
 import {
   Menu as MenuStyle,

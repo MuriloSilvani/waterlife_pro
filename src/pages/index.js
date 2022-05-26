@@ -22,7 +22,7 @@ import {
   Settings
 } from '../styles/pages/home'
 
-import api from './api'
+import api from '../services/api'
 import { DateTime } from 'luxon'
 
 const Home = () => {
