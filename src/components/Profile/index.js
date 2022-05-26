@@ -11,7 +11,7 @@ import Button from '../Button'
 import { FaChevronDown } from 'react-icons/fa'
 
 const Profile = () => {
-  const [open, setOpen] = useState(window?.innerWidth > 680)
+  const [open, setOpen] = useState(false)
   return (
     <ProfileWrapper open={open}>
       <TitleWrapper>
