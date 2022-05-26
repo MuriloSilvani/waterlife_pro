@@ -2,7 +2,6 @@
   "name": "waterlifepro",
   "version": "1.0.0",
   "private": true,
-  "homepage": "https://MuriloSilvani.github.io/waterlifepro_web/",
   "scripts": {
     "dev": "next dev",
     "export": "next export",
