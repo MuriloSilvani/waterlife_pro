@@ -61,8 +61,7 @@ api.getUserActions = async ({
       hour: 8,
       minute: 0
     })
-    // const newUserActions = [...Array(32)].map((arr, index) => ({
-    const newUserActions = [...Array(4)].map((arr, index) => ({
+    const newUserActions = [...Array(16)].map((arr, index) => ({
       _id: index,
       time: start.plus({
         minutes: index * 30

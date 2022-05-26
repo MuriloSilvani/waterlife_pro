@@ -2,6 +2,7 @@ import styled from 'styled-components'
 
 const Wrapper = styled.div`
   display: flex;
+  gap: 16px;
   flex-direction: column;
   align-items: center;
   background: #FFF;
@@ -10,6 +11,8 @@ const Wrapper = styled.div`
 `
 
 const Text1 = styled.span`
+  font-size: 22px;
+  font-weight: bold;
 `
 
 const PercentageWrapper = styled.span`
@@ -24,8 +27,8 @@ const PercentageWrapper = styled.span`
     justify-content: center;
   }
   position: relative;
-  width: 120px;
-  height: 120px;
+  width: 150px;
+  height: 150px;
   overflow: hidden;
   border-radius: 50%;
   border: 3px solid #FFF;
@@ -39,18 +42,10 @@ const Water = styled.div`
   background: rgb(23, 106, 201);
   @keyframes water {
     from {
-      transform: translate(
-        -50%,
-        -${({ val = 104 }) => val}%
-      ) rotate(0deg);
-      /* transform: translate(-50%, -65%) rotate(0deg); */
+      transform: translate(-50%, -65%) rotate(0deg);
     }
     to {
-      transform: translate(
-        -50%,
-        -${({ val = 104 }) => val}%
-      ) rotate(360deg);
-      /* transform: translate(-50%, -65%) rotate(360deg); */
+      transform: translate(-50%, -65%) rotate(360deg);
     }
   }
   &::after {
@@ -78,6 +73,7 @@ const Water = styled.div`
 `
 
 const Text2 = styled.span`
+  font-size: 14px;
 `
 
 export {

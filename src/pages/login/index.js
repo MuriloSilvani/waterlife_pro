@@ -18,7 +18,7 @@ import api from '../../services/api'
 
 const Login = () => {
   const router = useRouter()
-  const [name, setName] = useState('murilo')
+  const [name, setName] = useState('')
 
   const handleLogin = async (event) => {
     event.preventDefault()

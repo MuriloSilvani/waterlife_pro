@@ -3,7 +3,8 @@ import styled from 'styled-components'
 const Button = styled.button`
   width: 100%;
   height: 60px;
-  background: #30AFB4;
+  background: ${({ danger, success }) => success ? '#4BB543' : danger ? '#F32013' : '#30AFB4' };
+  cursor: pointer;
   border: 0;
   border-radius: 8px;
   color: #FFF;

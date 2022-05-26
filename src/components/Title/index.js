@@ -3,10 +3,11 @@ import {
 } from './style'
 
 const Title = ({
+  small = false,
   children
 }) => {
   return (
-    <TitleStyle>
+    <TitleStyle small={small}>
       {children}
     </TitleStyle>
   )

@@ -5,9 +5,16 @@ import {
 
 const Button = ({
   children,
+  danger,
+  success,
+  onClick
 }) => {
   return (
-    <ButtonStyle>
+    <ButtonStyle
+      onClick={onClick}
+      danger={danger}
+      success={success}
+    >
       {children}
     </ButtonStyle>
   )

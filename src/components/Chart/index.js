@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react'
 import {
   Wrapper,
   Text1,
@@ -6,19 +7,33 @@ import {
   Text2
 } from './style'
 
-const Chart = () => {
-  const percentage = 50
+import api from '../../services/api'
+
+const Chart = ({
+  watch
+}) => {
+  const [percentage, setPercentage] = useState(0)
+
+  const loadPercentage = async () => {
+    const actions = await api.getUserActions()
+
+    setPercentage(((100 * actions.filter(action => action.done).length) / actions.length).toFixed(1))
+  }
+
+  useEffect(() => {
+    loadPercentage()
+  }, [watch])
 
   return (
     <Wrapper>
-      <Text1>Voce consumiu</Text1>
+      <Text1>Você consumiu</Text1>
       <PercentageWrapper>
         <Water />
         <span>
           {percentage}%
         </span>
       </PercentageWrapper>
-      <Text2>da quantidade de agua para o dia de hoje</Text2>
+      <Text2>da quantidade de água  para o dia de hoje</Text2>
     </Wrapper>
   )
 }

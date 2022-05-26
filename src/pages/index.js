@@ -5,8 +5,9 @@ import Subtitle from '../components/Subtitle'
 import Paragraph from '../components/Paragraph'
 import Menu from '../components/Menu'
 import ControllDate from '../components/ControllDate'
+import Profile from '../components/Profile'
 import Chart from '../components/Chart'
-import { FaCheck } from 'react-icons/fa'
+import ListActions from '../components/ListActions'
 import {
   Grid,
   Container,
@@ -14,12 +15,10 @@ import {
 import {
   ContainerHome,
   Info,
-  ListActions,
-  Card,
-  Time,
-  Status,
-  Action,
-  Settings
+  InfoWrapper,
+  SettingsWrapper,
+  ControllWrapper,
+  ListWrapper
 } from '../styles/pages/home'
 
 import api from '../services/api'
@@ -30,6 +29,7 @@ const Home = () => {
 
   const [userActions, setUserActions] = useState([])
   const [date, setDate] = useState(DateTime.local())
+  const [watch, setWatch] = useState(false)
 
   const handleLoadActions = async () => {
     const actions = await api.getUserActions()
@@ -40,22 +40,7 @@ const Home = () => {
     }
   }
 
-  const handleAction = async ({
-    _id
-  }) => {
-    await api.updateActionStatus({
-      _id,
-      date
-    })
-    setUserActions(await api.getUserActions({ date }))
-  }
-
   const formatDate = date => DateTime.fromISO(date).toFormat('dd/MM/yyyy')
-  const formatTime = date => DateTime.fromISO(date).toFormat('HH:mm')
-
-  useEffect(() => {
-    handleLoadActions()
-  }, []);
 
   const onPrev = async () => {
     const newDate = date.minus({ days: 1 })
@@ -71,57 +56,53 @@ const Home = () => {
     setUserActions(await api.getUserActions({ date: newDate }))
   }
 
+  useEffect(() => {
+    handleLoadActions()
+  }, []);
+
+  useEffect(() => {
+    setWatch(!watch)
+  }, [userActions]);
+
   return (
     <Grid>
       <Menu />
       <Container>
         <ContainerHome>
-          <Info>
-            <Subtitle>
-              Cuide da sua hidratação diaria
-            </Subtitle>
-            <Paragraph>
-              Nosso corpo é constituido de cerca de 60% a 70% de água. Nosso sangue, músculos, pulmões e cérebro contém bastante água. Beber bastante líquido é vital para a nossa saúde.
-            </Paragraph>
-          </Info>
+          <InfoWrapper>
+            <Info>
+              <Subtitle>
+                Cuide da sua hidratação diaria
+              </Subtitle>
+              <Paragraph>
+                Nosso corpo é constituido de cerca de 60% a 70% de água. Nosso sangue, músculos, pulmões e cérebro contém bastante água. Beber bastante líquido é vital para a nossa saúde.
+              </Paragraph>
+            </Info>
+          </InfoWrapper>
 
-          <ControllDate
-            date={formatDate(date)}
-            onPrev={onPrev}
-            onNext={onNext}
-          />
+          <ControllWrapper>
+            <ControllDate
+              date={formatDate(date)}
+              onPrev={onPrev}
+              onNext={onNext}
+            />
+          </ControllWrapper>
 
-          <ListActions>
-            {
-              userActions.map((action, index) => (
-                <Card
-                  key={index}
-                >
-                  <Time>
-                    {formatTime(action.time)}
-                  </Time>
-                  <Status
-                    done={action.done}
-                  >
-                    {action.done ? 'Concluído' : 'Pendente'}
-                  </Status>
-                  <Action
-                    onClick={() => handleAction(action)}
-                  >
-                    <FaCheck />
-                  </Action>
-                </Card>
-              )) || (
-                <Card>
-                  Vazio
-                </Card>
-              )
-            }
-          </ListActions>
+          <ListWrapper>
+            <ListActions
+              actions={userActions}
+              date={date}
+              setUserActions={setUserActions}
+            />
+          </ListWrapper>
 
-          <Settings>
-            <Chart />
-          </Settings>
+          <SettingsWrapper>
+            <Chart
+              watch={watch}
+            />
+
+            <Profile />
+          </SettingsWrapper>
         </ContainerHome>
       </Container>
     </Grid>

@@ -3,95 +3,57 @@ import styled from 'styled-components'
 const ContainerHome = styled.main`
   height: 100%;
   display: grid;
-  gap: 10px 25px;
+  gap: 0px 20px;
   grid-template-columns: repeat(2, 1fr);
-  grid-template-rows: max-content;
+  grid-template-rows: min-content min-content 1fr;
   grid-template-areas:
     "info info"
-    "controll-date settings"
-    "list-actions settings"
+    "controll settings"
+    "list settings"
   ;
   @media (max-width: 680px) {
     grid-template-columns: 1fr;
-    grid-template-rows: 1fr;
+    grid-template-rows: min-content;
     grid-template-areas:
       "info"
       "settings"
-      "controll-date"
-      "list-actions"
+      "controll"
+      "list"
     ; 
   }
 `
 
 const Info = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+`
+
+const InfoWrapper = styled.div`
   grid-area: info;
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-  padding: 0 0 16px 0;
+  padding-bottom: 20px;
 `
 
-const ListActions = styled.ul`
-  grid-area: list-actions;
-  padding: 16px 0;
-  width: 100%;
-  display: flex;
-  gap: 16px;
-  flex-direction: column;
-  overflow: auto;
-  max-height: 100%;
-`
-
-const Card = styled.div`
-  padding: 16px;
-  background: #FFF;
-  border-radius: 16px;
-  display: grid;
-  grid-template-columns: 1fr 50px;
-  grid-template-areas:
-    "time action"
-    "status action"
-  ;
-`
-
-const Time = styled.span`
-  grid-area: time;
-`
-
-const Status = styled.span`
-  grid-area: status;
-  color: ${({ done }) => done ? '#4BB543' : '#df4759'};
-`
-
-const Action = styled.button`
-  grid-area: action;
-  cursor: pointer;
-  border-radius: 8px;
-  background: transparent;
-  color: #4BB543;
-  border: 1px solid #4BB543;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition-duration: .3s;
-
-  &:hover {
-    background: #4BB543;
-    color: #FFF;
-  }
-`
-
-const Settings = styled.div`
+const SettingsWrapper = styled.div`
   grid-area: settings;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+`
+
+const ControllWrapper = styled.div`
+  grid-area: controll;
+`
+
+const ListWrapper = styled.div`
+  grid-area: list;
 `
 
 export {
   ContainerHome,
   Info,
-  ListActions,
-  Card,
-  Time,
-  Status,
-  Action,
-  Settings
+  InfoWrapper,
+  SettingsWrapper,
+  ControllWrapper,
+  ListWrapper
 }
