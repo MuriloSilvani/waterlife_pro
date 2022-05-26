@@ -1,5 +1,11 @@
 import styled from 'styled-components'
 
+const Wrapper = styled.div``
+
+const Label = styled.label`
+  padding: 0 16px;
+`
+
 const Input = styled.input`
   width: 100%;
   height: 60px;
@@ -11,5 +17,7 @@ const Input = styled.input`
 `
 
 export {
+  Wrapper,
+  Label,
   Input
 }

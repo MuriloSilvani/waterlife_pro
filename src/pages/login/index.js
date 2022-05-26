@@ -37,7 +37,7 @@ const Login = () => {
           <div>
             <Logo
               alt="logo"
-              src="/logo.png"
+              src="logo.png"
             />
           </div>
           <Title>
@@ -59,7 +59,7 @@ const Login = () => {
       <ImageContainer>
         <Image
           alt="logo"
-          src="/banner.png"
+          src="banner.png"
         />
       </ImageContainer>
     </LoginContainer>

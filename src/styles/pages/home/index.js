@@ -1,7 +1,8 @@
 import styled from 'styled-components'
 
 const ContainerHome = styled.main`
-  height: 100%;
+  max-height: 100%;
+  overflow: hidden;
   display: grid;
   gap: 0px 20px;
   grid-template-columns: repeat(2, 1fr);
@@ -12,6 +13,8 @@ const ContainerHome = styled.main`
     "list settings"
   ;
   @media (max-width: 680px) {
+    gap: 20px;
+    overflow: visible;
     grid-template-columns: 1fr;
     grid-template-rows: min-content;
     grid-template-areas:
@@ -47,6 +50,7 @@ const ControllWrapper = styled.div`
 
 const ListWrapper = styled.div`
   grid-area: list;
+  overflow: auto;
 `
 
 export {

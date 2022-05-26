@@ -38,11 +38,21 @@ const ContentWrapper = styled.div`
   flex-direction: column;
   width: 100%;
   gap: 10px;
+  `
+
+const InputRow = styled.div`
+  display: grid;
+  gap: 10px;
+  grid-template-columns: repeat(2, 1fr);
+  @media (max-width: 680px) {
+    grid-template-columns: 1fr;
+  }
 `
 
 export {
   ProfileWrapper,
   TitleWrapper,
   OpenButton,
-  ContentWrapper
+  ContentWrapper,
+  InputRow
 }

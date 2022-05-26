@@ -1,4 +1,7 @@
-import { FaCheck } from 'react-icons/fa'
+import {
+  FaCheck,
+  FaTimes
+} from 'react-icons/fa'
 import {
   ListActions as ListActionsStyle,
   Card,
@@ -16,9 +19,12 @@ const ListActions = ({
   setUserActions
 }) => {
   const today = DateTime.local() 
-  const diff = date?.diff(today, ['hours']).hours.toFixed(0)
   const diffDays = today.diff(date, ['days']).days.toFixed(0) === '0'
   const formatTime = date => DateTime.fromISO(date).toFormat('HH:mm')
+  const calcDiff = (time) => {
+    const _time = DateTime.fromISO(time)
+    return _time.diff(today, ['hours']).hours.toFixed(0)
+  }
 
   const handleAction = async ({
     _id
@@ -43,15 +49,20 @@ const ListActions = ({
             <Status
               done={action.done}
             >
-              {action.done ? 'Concluído' : diffDays ? 'Pendente' : diff < 0 ? 'expirado' : `Disponivel em ${diff} horas` }
+              {action.done ? 'Concluído' : diffDays ? 'Pendente' : calcDiff(action.time) < 0 ? 'Expirado' : `Disponivel em ${calcDiff(action.time)} horas` }
             </Status>
             {diffDays}
             {
-              diffDays && !action.done && (
+              diffDays && (
                 <Action
+                  done={action.done}
                   onClick={() => handleAction(action)}
                 >
-                  <FaCheck />
+                  {
+                    action.done
+                      ? <FaTimes />
+                      : <FaCheck />
+                  }
                 </Action>
               )
             }

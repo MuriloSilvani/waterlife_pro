@@ -36,8 +36,8 @@ const Action = styled.button`
   cursor: pointer;
   border-radius: 8px;
   background: transparent;
-  color: #4BB543;
-  border: 1px solid #4BB543;
+  color: ${({ done }) => done ? '#df4759' : '#4BB543'};
+  border: 1px solid ${({ done }) => done ? '#df4759' : '#4BB543'};
   display: flex;
   align-items: center;
   justify-content: center;

@@ -57,11 +57,11 @@ api.getUserActions = async ({
   if (find) {
     return sort(find)
   } else {
-    const start = today.set({
+    const start = (date || today).set({
       hour: 8,
       minute: 0
     })
-    const newUserActions = [...Array(16)].map((arr, index) => ({
+    const newUserActions = [...Array(32)].map((arr, index) => ({
       _id: index,
       time: start.plus({
         minutes: index * 30
