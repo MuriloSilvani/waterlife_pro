@@ -12,7 +12,7 @@ import {
   Form,
   ImageContainer,
   Image
-} from '../../styles/pages/style'
+} from '../../styles/pages/login'
 
 import api from '../api'
 

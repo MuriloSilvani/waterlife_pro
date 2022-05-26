@@ -19,7 +19,7 @@ import {
   Status,
   Action,
   Settings
-} from '../../styles/pages/style'
+} from '../../styles/pages/home'
 
 import api from '../api'
 import { DateTime } from 'luxon'
