@@ -26,7 +26,7 @@ const Login = () => {
     if (await api.login({
       name
     })) {
-      router.push('/home')
+      router.push('/')
     }
   }
 

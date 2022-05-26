@@ -1,15 +1,16 @@
 import { useState, useEffect } from 'react'
+import { useRouter } from 'next/router'
 
-import Subtitle from '../../components/Subtitle'
-import Paragraph from '../../components/Paragraph'
-import Menu from '../../components/Menu'
-import ControllDate from '../../components/ControllDate'
-import Chart from '../../components/Chart'
+import Subtitle from '../components/Subtitle'
+import Paragraph from '../components/Paragraph'
+import Menu from '../components/Menu'
+import ControllDate from '../components/ControllDate'
+import Chart from '../components/Chart'
 import { FaCheck } from 'react-icons/fa'
 import {
   Grid,
   Container,
-} from '../../styles/Template'
+} from '../styles/Template'
 import {
   ContainerHome,
   Info,
@@ -19,17 +20,24 @@ import {
   Status,
   Action,
   Settings
-} from '../../styles/pages/home'
+} from '../styles/pages/home'
 
-import api from '../api'
+import api from './api'
 import { DateTime } from 'luxon'
 
 const Home = () => {
+  const router = useRouter()
+
   const [userActions, setUserActions] = useState([])
   const [date, setDate] = useState(DateTime.local())
 
   const handleLoadActions = async () => {
-    setUserActions(await api.getUserActions())
+    const actions = await api.getUserActions()
+    if (actions) {
+      setUserActions(actions)
+    } else {
+      router.push('/login')
+    }
   }
 
   const handleAction = async ({

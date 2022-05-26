@@ -37,6 +37,8 @@ api.getUserActions = async ({
   date
 } = {}) => {
   const user = await api.getUser()
+  if (!user) return false
+
   const today = DateTime.local()
   const key = `${user.name}-${date?.toISODate() || today.toISODate()}`
 
