@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
-  basePath: '/waterlifepro_web/',
+  basePath: '/waterlifepro_web',
   assetPrefix: '/waterlifepro_web/',
 }
 
