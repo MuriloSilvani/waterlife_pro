@@ -18,6 +18,10 @@ const NextPrev = styled.button`
   &:hover {
     opacity: .5;
   }
+  ${({ disabled }) => disabled && `
+    pointer-events: none;
+    opacity: 0.5;
+  ` }
 `
 
 export {

@@ -31,16 +31,17 @@ const Home = () => {
   const [date, setDate] = useState(DateTime.local())
   const [watch, setWatch] = useState(false)
 
-  const handleLoadActions = async () => {
-    const actions = await api.getUserActions()
-    if (actions) {
-      setUserActions(actions)
-    } else {
+  const handleLoadUser = async () => {
+    const user = await api.getUser()
+    if (!user) {
       router.push('/login')
     }
   }
 
-  const formatDate = date => DateTime.fromISO(date).toFormat('dd/MM/yyyy')
+  const handleLoadActions = async (_date = null) => {
+    const actions = await api.getUserActions({ date: _date })
+    setUserActions(actions)
+  }
 
   const onPrev = async () => {
     const newDate = date.minus({ days: 1 })
@@ -57,6 +58,7 @@ const Home = () => {
   }
 
   useEffect(() => {
+    handleLoadUser()
     handleLoadActions()
   }, []);
 
@@ -82,7 +84,7 @@ const Home = () => {
 
           <ControllWrapper>
             <ControllDate
-              date={formatDate(date)}
+              date={date}
               onPrev={onPrev}
               onNext={onNext}
             />
@@ -97,11 +99,24 @@ const Home = () => {
           </ListWrapper>
 
           <SettingsWrapper>
-            <Chart
-              watch={watch}
+            {
+              <Chart
+                watch={watch}
+              />
+            }
+
+            <Profile
+              date={date}
+              onSave={handleLoadActions}
             />
 
-            <Profile />
+            <div>
+              <h2>Funcionamento</h2>
+              <p>
+                A quantidade diaria e calculada com base no seu peso, sao 35ml por kg.
+                A distribuicao no dia e feita com base no horarios que costuma acordar e dormir, distribuindo igualmente a quantidade total em diversas doses no decorer do dia.
+              </p>
+            </div>
           </SettingsWrapper>
         </ContainerHome>
       </Container>

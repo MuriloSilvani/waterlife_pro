@@ -42,6 +42,7 @@ const SettingsWrapper = styled.div`
   display: flex;
   flex-direction: column;
   gap: 16px;
+  overflow: auto;
 `
 
 const ControllWrapper = styled.div`

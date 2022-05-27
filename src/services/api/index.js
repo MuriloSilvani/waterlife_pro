@@ -33,11 +33,40 @@ api.getUser = async ({} = {}) => {
   return JSON.parse(localStorage.getItem('logged'))
 }
 
+api.updateUser = async ({
+  age,
+  weight,
+  start,
+  end
+} = {}) => {
+  const user = await api.getUser()
+
+  const data = {
+    ...user,
+    age,
+    weight,
+    start,
+    end,
+    daily_quantity: weight * 35
+  }
+
+  let users = JSON.parse(localStorage.getItem('users')) 
+  users = users.map(u => {
+    if (u.name === user.name) {
+      u = data
+    }
+    return u
+  })
+  
+  localStorage.setItem('users', JSON.stringify(users))
+  localStorage.setItem('logged', JSON.stringify(data))
+}
+
 api.getUserActions = async ({
   date
 } = {}) => {
   const user = await api.getUser()
-  if (!user) return false
+  if (!user || !user.start) return []
 
   const today = DateTime.local()
   const key = `${user.name}-${date?.toISODate() || today.toISODate()}`
@@ -57,17 +86,40 @@ api.getUserActions = async ({
   if (find) {
     return sort(find)
   } else {
+    const userStart = user.start.split(':')
     const start = (date || today).set({
-      hour: 8,
-      minute: 0
+      hour: userStart[0],
+      minute: userStart[1]
     })
-    const newUserActions = [...Array(32)].map((arr, index) => ({
-      _id: index,
-      time: start.plus({
-        minutes: index * 30
-      }).toISO(),
-      done: false
-    }))
+    const userEnd = user.end.split(':')
+    const end = (date || today).set({
+      hour: userEnd[0],
+      minute: userEnd[1]
+    })
+
+    let currTime = start
+    let newUserActions = []
+
+    const hasDiff = () => {
+      return currTime.diff(end).milliseconds <= 5
+    }
+
+    while (hasDiff()) {
+      newUserActions.push({
+        _id: newUserActions.length,
+        time: currTime.toISO(),
+        done: false
+      })
+
+      currTime = currTime.plus({
+        minutes: 30
+      })
+    }
+    newUserActions = newUserActions.map(o => {
+      o.quantity = user.daily_quantity / newUserActions.length
+      return o
+    })
+
     localStorage.setItem(key, JSON.stringify(newUserActions))
     return sort(newUserActions)
   }

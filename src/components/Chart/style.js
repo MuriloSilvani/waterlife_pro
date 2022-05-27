@@ -40,12 +40,17 @@ const Water = styled.div`
   height: 100%;
   width: 100%;
   background: rgb(23, 106, 201);
+  transition: 0.3s ease-out;
   @keyframes water {
     from {
-      transform: translate(-50%, -65%) rotate(0deg);
+      transform: translate(-50%, -${({ val = 0 }) => {
+        return (val * 0.6) + 35
+      }}%) rotate(0deg);
     }
     to {
-      transform: translate(-50%, -65%) rotate(360deg);
+      transform: translate(-50%, -${({ val = 0 }) => {
+        return (val * 0.6) + 35
+      }}%) rotate(360deg);
     }
   }
   &::after {

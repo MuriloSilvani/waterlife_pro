@@ -39,12 +39,19 @@ const ListActions = ({
   return (
     <ListActionsStyle>
       {
+        !actions.length && (
+          <span>
+            Cadastre seus dados ao lado para gerar a tabela
+          </span>
+        )
+      }
+      {
         actions.map((action, index) => (
           <Card
             key={index}
           >
             <Time>
-              {formatTime(action.time)}
+              {formatTime(action.time)} ({action.quantity?.toFixed(0)} ml)
             </Time>
             <Status
               done={action.done}

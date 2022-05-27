@@ -9,9 +9,9 @@ const ProfileWrapper = styled.div`
   padding: 16px;
   border-radius: 16px;
 
-  overflow: hidden;
+  overflow: ${({ open }) => open ? 'visible' : 'hidden'};
   transition-duration: .3s;
-  max-height: ${({ open }) => open ? '360px' : '68px'};
+  max-height: ${({ open }) => open ? '100vh' : '68px'};
 `
 
 const TitleWrapper = styled.div`
@@ -33,7 +33,7 @@ const OpenButton = styled.button`
   }
 `
 
-const ContentWrapper = styled.div`
+const ContentWrapper = styled.form`
   display: flex;
   flex-direction: column;
   width: 100%;
